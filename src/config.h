@@ -11,8 +11,10 @@
 #ifndef mobi_config_h
 #define mobi_config_h
 
+#define HAVE_CONFIG_H
+
 #ifdef HAVE_CONFIG_H
-#include "../config.h"
+#include "../config_src.h"
 #endif
 
 #endif

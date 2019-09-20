@@ -13,6 +13,8 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
+#define USE_XMLWRITER 1
+
 /* return codes */
 #define ERROR 1
 #define SUCCESS 0

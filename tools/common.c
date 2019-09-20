@@ -19,6 +19,19 @@
 #include <mobi.h>
 #include "common.h"
 
+/* miniz file is needed for EPUB creation */
+# define MINIZ_HEADER_FILE_ONLY
+# define MINIZ_NO_ZLIB_COMPATIBLE_NAMES
+# include "../src/miniz.c"
+
+#define EPUB_CONTAINER "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\
+<container version=\"1.0\" xmlns=\"urn:oasis:names:tc:opendocument:xmlns:container\">\n\
+<rootfiles>\n\
+<rootfile full-path=\"OEBPS/content.opf\" media-type=\"application/oebps-package+xml\"/>\n\
+</rootfiles>\n\
+</container>"
+#define EPUB_MIMETYPE "application/epub+zip"
+
 /**
  @brief Messages for libmobi return codes
  For reference see enum MOBI_RET in mobi.h

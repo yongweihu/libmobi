@@ -974,3 +974,35 @@ int main(int argc, char *argv[]) {
 #endif
     return ret;
 }
+
+int unzip_epub_from_mobi(const char *mobipath, const char *output_dir)
+{
+#ifdef USE_XMLWRITER
+    create_epub_opt = 1;
+#endif
+    
+    dump_parts_opt = 1;
+    outdir_opt = 1;
+    
+    size_t outdir_length = strlen(output_dir);
+    if (outdir_length >= FILENAME_MAX - 1) {
+        printf("Output directory name too long\n");
+        return ERROR;
+    }
+    strncpy(outdir, output_dir, FILENAME_MAX - 1);
+    if (!dir_exists(outdir)) {
+        printf("Output directory is not valid\n");
+        return ERROR;
+    }
+    if (output_dir[outdir_length - 1] != separator) {
+        // append separator
+        if (outdir_length >= FILENAME_MAX - 2) {
+            printf("Output directory name too long\n");
+            return ERROR;
+        }
+        outdir[outdir_length++] = separator;
+        outdir[outdir_length] = '\0';
+    }
+    
+    return loadfilename(mobipath);
+}
